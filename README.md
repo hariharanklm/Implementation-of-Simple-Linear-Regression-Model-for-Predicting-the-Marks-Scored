@@ -8,70 +8,63 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1.Use the standard libraries in python for Gradient Design.
+1. Import the required libraries and read the dataframe.
 
-2.Set variables for assigning dataset values.
+2. Assign hours to X and scores to Y.
+3. Implement training set and test set of the dataframe
+4. Plot the required graph both for test data and training data.
+5. .Find the values of MSE , MAE and RMSE.
 
-3.Import linear regression from sklearn.
-
-4.Assign the points for representing in the graph.
-
-5.Predict the regression for marks by using the representation of the graph.
-
-6.Compare the graphs and hence we obtained the linear regression for the given datas.
 ## Program:
 ```
+/*
 Program to implement the simple linear regression model for predicting the marks scored.
-Developed by: Hariharan M 
-RegisterNumber: 212221220015
+Developed by: SV Rohihtkumar
+RegisterNumber:  212221230084
+*/
 
-
-import numpy as np
 import pandas as pd
-dataset=pd.read_csv('/content/student_scores.csv')
+import numpy as np
+df=pd.read_csv('student_scores.csv')
+print(df)
 
-X=dataset.iloc[:,:-1].values
-Y=dataset.iloc[:,-1].values
-print(X)
-print(Y)
-
+X=df.iloc[:,:-1].values
+Y=df.iloc[:,1].values
+print(X,Y)
 from sklearn.model_selection import train_test_split
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=1/3,random_state=0)
-
 from sklearn.linear_model import LinearRegression
 reg=LinearRegression()
 reg.fit(X_train,Y_train)
 
 Y_pred=reg.predict(X_test)
 import matplotlib.pyplot as plt
-from sklearn.metrics import mean_absolute_error,mean_squared_error
+from sklearn.metrics import mean_absolute_error , mean_squared_error
 
 plt.scatter(X_train,Y_train,color='green')
-plt.plot(X_train,reg.predict(X_train),color='red')
-plt.title('training set(h vs s)')
-plt.xlabel('hours')
-plt.ylabel('scores')
+plt.plot(X_train,reg.predict(X_train),color='purple')
+plt.title(' Training set (Hours Vs Scores)')
+plt.xlabel('Hours')
+plt.ylabel('Scores')
 
-plt.scatter(X_test,Y_test,color='red')
-plt.plot(X_test,reg.predict(X_test),color='green')
-plt.title('test set(h vs s)')
-plt.xlabel('hours')
-plt.ylabel('scores')
+plt.scatter(X_test,Y_test,color='green')
+plt.plot(X_test,reg.predict(X_test),color='purple')
+plt.title(' Training set (Hours Vs Scores)')
+plt.xlabel('Hours')
+plt.ylabel('Scores')
 
 mse=mean_squared_error(Y_test,Y_pred)
-print('MSC=',mse)
-
+print('MSE = ',mse)
 mae=mean_absolute_error(Y_test,Y_pred)
-print('MAE=',mae)
-
+print('MAE = ',mae)
 rmse=np.sqrt(mse)
-print("RMSE=",rmse)
+print('RMSE = ',rmse)
+*/
 ```
-
 ## Output:
-![op1](https://user-images.githubusercontent.com/117006918/198871517-85da7730-c83b-48c5-8a73-0a30eaf17adc.png)
-![op2](https://user-images.githubusercontent.com/117006918/198871526-2fb578d4-3621-43c1-adba-2a95a5cde67d.png)
-
+![simple linear regression model for predicting the marks scored](t1.png)
+![simple linear regression model for predicting the marks scored](t2.png)
+![simple linear regression model for predicting the marks scored](t3.png)
 
 
 ## Result:
